@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 
 // components
-import App from './components/app/app';
+import App from './containers/app/app';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
