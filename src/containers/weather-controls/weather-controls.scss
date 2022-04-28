@@ -1,0 +1,22 @@
+@import "../../scss/mixins";
+
+.weather-controls {
+	display: flex;
+	justify-content: center;
+	&__content {
+		@include adaptive-value(margin-bottom, 45, 20, "px");
+
+		span {
+			color: #000000;
+			font-weight: 800;
+			@include adaptive-value(font-size, 28, 20, "px");
+		}
+	}
+
+	&__button {
+		font-weight: 800;
+		@include adaptive-value(font-size, 28, 20, "px");
+		color: #000000;
+		background-color: transparent;
+	}
+}

@@ -1,0 +1,14 @@
+@import "../../scss/mixins";
+
+.weather-weekly {
+	&__content {
+		@include adaptive-value(margin-bottom, 100, 50, "px");
+	}
+
+	&__list {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 50px;
+	}
+}

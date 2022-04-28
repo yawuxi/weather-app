@@ -1,0 +1,24 @@
+@import "../../scss/mixins";
+
+// weather
+.weather {
+	display: grid;
+	grid-template-columns: 500px 1fr;
+
+	&__choose-title {
+		font-weight: 500;
+		@include adaptive-value(font-size, 36, 24, "px");
+	}
+}
+
+// weather-main
+.weather-main {
+	@include adaptive-value(padding, 35, 20, "px");
+}
+
+// media query
+@media (max-width: 768px) {
+	.weather {
+		display: block;
+	}
+}
