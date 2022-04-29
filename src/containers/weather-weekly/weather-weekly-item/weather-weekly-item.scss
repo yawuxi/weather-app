@@ -5,6 +5,7 @@
 		cursor: pointer;
 		@include adaptive-value(padding, 15, 10, "px");
 		max-width: 125px;
+		min-width: 100px;
 		width: 100%;
 		min-height: 150px;
 		display: flex;

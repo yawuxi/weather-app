@@ -3,11 +3,13 @@
 // weather
 .weather {
 	display: grid;
+	height: 100vh;
 	grid-template-columns: 500px 1fr;
 
 	&__choose-title {
 		font-weight: 500;
 		@include adaptive-value(font-size, 36, 24, "px");
+		@include adaptive-value(margin-bottom, 40, 20, "px");
 	}
 }
 
@@ -17,8 +19,24 @@
 }
 
 // media query
-@media (max-width: 768px) {
+
+// width
+@media (max-width: 1190px) {
 	.weather {
 		display: block;
+	}
+}
+
+// height
+
+@media (max-height: 1000px) {
+	.weather {
+		&__choose-title {
+			margin-bottom: 20px;
+		}
+	}
+
+	.weather-main {
+		padding: 20px;
 	}
 }

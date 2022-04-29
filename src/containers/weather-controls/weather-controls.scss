@@ -20,3 +20,14 @@
 		background-color: transparent;
 	}
 }
+
+// media query
+
+// height
+@media (max-height: 1000px) {
+	.weather-controls {
+		&__content {
+			margin-bottom: 20px;
+		}
+	}
+}

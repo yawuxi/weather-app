@@ -2,7 +2,7 @@
 
 .weather-sidebar {
 	&__content {
-		min-height: 100vh;
+		min-height: 100%;
 		@include adaptive-value(padding, 40, 20, "px");
 		background: #f4f4f4;
 		box-shadow: 10px 0px 25px rgba(0, 0, 0, 0.1);
@@ -139,17 +139,7 @@
 // media query
 
 // width
-@media (max-width: 1200px) {
-	.weather-sidebar {
-		&__search {
-			&::before {
-				display: none;
-			}
-		}
-	}
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1190px) {
 	.weather-sidebar {
 		&__content {
 			width: 100vw;
@@ -186,7 +176,7 @@
 }
 
 // height
-@media (max-height: 900px) {
+@media (max-height: 1000px) {
 	.weather-sidebar {
 		&__content {
 			padding: 20px;
