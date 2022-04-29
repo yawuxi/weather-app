@@ -23,6 +23,11 @@
 		@include adaptive-value(font-size, 24, 18, "px");
 	}
 
+	&__date {
+		font-size: 20px;
+		font-weight: 400;
+	}
+
 	img {
 		max-width: 50px;
 		width: 100%;
