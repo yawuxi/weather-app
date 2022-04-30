@@ -73,8 +73,6 @@ function WeatherSidebar() {
 					<img src={image} alt="" />
 				</div>
 				{infoContent}
-				{loaded}
-				{err}
 				<div className="divider"></div>
 				<h2 className='weather-sidebar__fact-title'>Interesting fact!</h2>
 				<div className="weather-sidebar__fact">
