@@ -60,7 +60,7 @@ function WeatherSidebar() {
 	const loaded = loading ? <Spinner /> : null
 	const err = error ? <Error /> : null
 	const factContent = !(loading || error) ? fact : null
-	const infoContent = !(loading || error) ? <ViewBox barState={barState} /> : null
+	// const infoContent = !(loading || error) ? <ViewBox barState={barState} /> : null
 
 	return (
 		<aside className="weather-sidebar">
@@ -72,7 +72,7 @@ function WeatherSidebar() {
 				<div className="weather-sidebar__weather-status">
 					<img src={image} alt="" />
 				</div>
-				{infoContent}
+				<ViewBox barState={barState} />
 				<div className="divider"></div>
 				<h2 className='weather-sidebar__fact-title'>Interesting fact!</h2>
 				<div className="weather-sidebar__fact">
