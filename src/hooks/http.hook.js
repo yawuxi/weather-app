@@ -21,10 +21,10 @@ export function useHttp() {
 			return data
 		} catch (error) {
 			setLoading(false)
-			setError(error.message)
+			setError(error)
 			throw error
 		}
 	}
 
-	return { request, loading, error }
+	return { request, loading, error, setLoading, setError }
 }

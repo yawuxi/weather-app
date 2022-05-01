@@ -18,9 +18,34 @@
 	@include adaptive-value(padding, 35, 20, "px");
 }
 
-// media query
+// weather-controls
+.weather-controls {
+	display: flex;
+	justify-content: center;
+	&__content {
+		@include adaptive-value(margin-bottom, 45, 30, "px");
+	}
 
+	&__text {
+		font-weight: 400;
+		font-size: 28px;
+	}
+}
+
+// media query
 // width
+@media (max-width: 1700px) {
+	.weather {
+		grid-template-columns: 400px 1fr;
+	}
+}
+
+@media (max-width: 1430px) {
+	.weather {
+		grid-template-columns: 350px 1fr;
+	}
+}
+
 @media (max-width: 1190px) {
 	.weather {
 		display: block;
@@ -28,7 +53,6 @@
 }
 
 // height
-
 @media (max-height: 1000px) {
 	.weather {
 		&__choose-title {
@@ -38,5 +62,11 @@
 
 	.weather-main {
 		padding: 20px;
+	}
+
+	.weather-controls {
+		&__content {
+			margin-bottom: 20px;
+		}
 	}
 }

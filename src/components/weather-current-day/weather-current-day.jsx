@@ -1,6 +1,13 @@
-// styles
+// react
+
+// additional functional
+
+// components
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+// styles&img
 import './weather-current-day.scss'
-import '../weather-current-day/weather-current-day-item/weather-current-day-item.scss'
 import sunRise from '../../images/day-weather__sunrise-image.png'
 import sunSet from '../../images/day-weather__sunset-image.png'
 import lowTemp from '../../images/low-temperature.png'
@@ -11,9 +18,20 @@ function WeatherCurrentDay({ weatherInfo }) {
 		<div className="weather-day-info">
 			<div className="weather-day-info__content">
 				<ul className="weather-day-info__list info-list">
-					{weatherInfo.date ? <ViewBox weatherInfo={weatherInfo} /> : null}
+					<SkeletonTheme baseColor="#c5c5c5" highlightColor="#cecdcd">
+						{weatherInfo.date ? <ViewBox weatherInfo={weatherInfo} /> : [
+							<Skeleton width={300} height={250} borderRadius={25} key={1} />,
+							<Skeleton width={300} height={250} borderRadius={25} key={2} />,
+							<Skeleton width={300} height={250} borderRadius={25} key={3} />,
+							<Skeleton width={300} height={250} borderRadius={25} key={4} />,
+							<Skeleton width={300} height={250} borderRadius={25} key={5} />,
+							<Skeleton width={300} height={250} borderRadius={25} key={6} />,
+						]}
+					</SkeletonTheme>
 				</ul>
-				{weatherInfo.date ? <PoweredBy /> : null}
+				<SkeletonTheme baseColor="#c5c5c5" highlightColor="#cecdcd">
+					{weatherInfo.date ? <PoweredBy /> : <Skeleton width={300} height={'100%'} borderRadius={25} />}
+				</SkeletonTheme>
 			</div>
 		</div>
 	)
@@ -22,14 +40,14 @@ function WeatherCurrentDay({ weatherInfo }) {
 function ViewBox({ weatherInfo }) {
 	const { sunrise, sunset, wind, humidity, temp } = weatherInfo
 
-	const sunRiseHours = new Date(sunrise * 1000).getHours()
-	const sunRiseMinutes = new Date(sunrise * 1000).getMinutes()
-	const sunSetHours = new Date(sunset * 1000).getHours()
-	const sunSetMinutes = new Date(sunset * 1000).getMinutes()
+	let sunRiseHours = new Date(sunrise * 1000).getHours()
+	let sunRiseMinutes = new Date(sunrise * 1000).getMinutes()
+	let sunSetHours = new Date(sunset * 1000).getHours()
+	let sunSetMinutes = new Date(sunset * 1000).getMinutes()
 
 	return (
 		<>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="10">
 				<h3 className="info-list__title">UV Index</h3>
 				<div className="uv-index">
 					<div className="uv-index__content">
@@ -67,22 +85,30 @@ function ViewBox({ weatherInfo }) {
 					</div>
 				</div>
 			</li>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="11">
 				<h3 className="info-list__title">Sunrise & sunset</h3>
 				<div className="sun-set-rise">
 					<div className="sun-set-rise__content">
 						<div className="sun-set-rise__block">
 							<img src={sunRise} alt="" />
-							<p className="sun-set-rise__time">{sunRiseHours + ':' + sunRiseMinutes}</p>
+							<p className="sun-set-rise__time">
+								{sunRiseHours < 10 ? '0' + sunRiseHours : sunRiseHours}
+								:
+								{sunRiseMinutes < 10 ? '0' + sunRiseMinutes : sunRiseMinutes}
+							</p>
 						</div>
 						<div className="sun-set-rise__block">
 							<img src={sunSet} alt="" />
-							<p className="sun-set-rise__time">{sunSetHours + ':' + sunSetMinutes}</p>
+							<p className="sun-set-rise__time">
+								{sunSetHours < 10 ? '0' + sunSetHours : sunSetHours}
+								:
+								{sunSetMinutes < 10 ? '0' + sunSetMinutes : sunSetMinutes}
+							</p>
 						</div>
 					</div>
 				</div>
 			</li>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="12">
 				<h3 className="info-list__title">Humidity</h3>
 				<div className="humidity">
 					<div className="humidity__content">
@@ -92,7 +118,7 @@ function ViewBox({ weatherInfo }) {
 					</div>
 				</div>
 			</li>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="13">
 				<h3 className="info-list__title">Visibility</h3>
 				<div className="visibility">
 					<div className="visibility__content">
@@ -101,7 +127,7 @@ function ViewBox({ weatherInfo }) {
 					</div>
 				</div>
 			</li>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="14">
 				<h3 className="info-list__title">Min & max temperature</h3>
 				<div className="temperature">
 					<div className="temperature__content">
@@ -116,7 +142,7 @@ function ViewBox({ weatherInfo }) {
 					</div>
 				</div>
 			</li>
-			<li className="info-list__item">
+			<li className="info-list__item" tabIndex="15">
 				<h3 className="info-list__title">Wind</h3>
 				<div className="wind">
 					<div className="wind__content">

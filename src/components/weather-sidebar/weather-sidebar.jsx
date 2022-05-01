@@ -1,18 +1,21 @@
-// styles
-import './weather-sidebar.scss'
+// react
 import { useState, useEffect } from 'react'
+
+// additional functional
 import moment from 'moment'
+import useWeatherService from '../../services/weatherService'
+import useConditionalRender from '../../hooks/coniditional-render.hook'
+
+// components
+import WeatherSidebarSearch from './weather-sidebar-search/weather-sidebar-search'
+
+// styles&img
+import './weather-sidebar.scss'
 import image from '../../images/cloudy.png'
 
-import useNumbersService from '../../services/numbersService'
-import useWeatherService from '../../services/weatherService'
-import Spinner from '../spinner/spinner'
-import Error from '../error/error'
-
-
-function WeatherSidebar() {
-	const { getFactByData, loading, error } = useNumbersService()
-	const { getDataForSideBar } = useWeatherService()
+function WeatherSidebar({ getLocation }) {
+	const { getDataForSideBar, loading, error } = useWeatherService()
+	const { condRender } = useConditionalRender()
 
 	const currentDate = new Date()
 
@@ -24,20 +27,17 @@ function WeatherSidebar() {
 		dayNumberOfWeek: currentDate.getUTCDay(),
 		dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 		time: {
-			hours: moment().format('h'),
-			minutes: moment().format('mm')
+			hours: moment().format().slice(11, 13),
+			minutes: moment().format().slice(14, 16)
 		},
-		fact: '',
 	})
 
-	const { fact, day, month } = barState
+	const getCityData = (data) => {
+		setBarState(barState =>
+			({ ...barState, temperature: data.temp, location: data.location }))
+	}
 
 	useEffect(() => {
-		getFactByData({ day, month })
-			.then(res => {
-				setBarState(barState => ({ ...barState, fact: res.text }))
-			})
-
 		getDataForSideBar(50.4501, 30.5234)
 			.then(res => {
 				setBarState(barState => ({ ...barState, temperature: res.temp, location: res.location }))
@@ -46,8 +46,8 @@ function WeatherSidebar() {
 		const interval = setInterval(() => {
 			setBarState(barState => ({
 				...barState, time: {
-					hours: barState.time.hours = moment().format('h'),
-					minutes: barState.time.minutes = moment().format('m')
+					hours: moment().format().slice(11, 13),
+					minutes: moment().format().slice(14, 16)
 				}
 			}))
 		}, 10000)
@@ -57,29 +57,27 @@ function WeatherSidebar() {
 		}
 	}, [])
 
-	const loaded = loading ? <Spinner /> : null
-	const err = error ? <Error /> : null
-	const factContent = !(loading || error) ? fact : null
-	// const infoContent = !(loading || error) ? <ViewBox barState={barState} /> : null
+	const { loaded, err, content } = condRender(loading, error, <ViewBox barState={barState} />)
+
+	const dividerStyles = loading || err ? { marginTop: 50 } : {}
 
 	return (
 		<aside className="weather-sidebar">
 			<div className="weather-sidebar__content">
-				<div className="weather-sidebar__search">
-					<input type="text" placeholder='search for places...' />
-					<button></button>
-				</div>
+				<WeatherSidebarSearch getCityData={getCityData} getLocation={getLocation} />
 				<div className="weather-sidebar__weather-status">
 					<img src={image} alt="" />
 				</div>
-				<ViewBox barState={barState} />
-				<div className="divider"></div>
-				<h2 className='weather-sidebar__fact-title'>Interesting fact!</h2>
+				{content}
+				{loaded}
+				{err}
+				<div className="divider" style={dividerStyles}></div>
+				{/* <h2 className='weather-sidebar__fact-title'>Interesting fact!</h2>
 				<div className="weather-sidebar__fact">
 					{factContent}
-					{loaded}
-					{err}
-				</div>
+					{factLoaded}
+					{factErr}
+				</div> */}
 			</div>
 		</aside >
 	)
