@@ -2,7 +2,7 @@ import { useHttp } from "../hooks/http.hook"
 
 const useWeatherService = () => {
 	const _apiWeatherBase = 'https://api.openweathermap.org/data/2.5/onecall?'
-	const _apiGeocodeBase = 'http://api.openweathermap.org/geo/1.0/direct'
+	const _apiGeocodeBase = 'https://api.openweathermap.org/geo/1.0/direct'
 	const _apiKey = 'fa58a0c787258b5d7584e89bb5d49fa2'
 
 	// first acc key - 07da36f5c31cbe698220e0230cc748f0
