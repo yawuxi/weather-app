@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 // additional functional
 import moment from 'moment'
+import { motion } from 'framer-motion'
 import useWeatherService from '../../services/weatherService'
 import useConditionalRender from '../../hooks/coniditional-render.hook'
 
@@ -62,8 +63,13 @@ function WeatherSidebar({ getLocation }) {
 	const dividerStyles = loading || err ? { marginTop: 50 } : {}
 
 	return (
-		<aside className="weather-sidebar">
-			<div className="weather-sidebar__content">
+		<motion.aside
+			className="weather-sidebar"
+			transition={{ delay: 1 }}
+			animate={{
+				x: ['-100%', '0%']
+			}}>
+			< div className="weather-sidebar__content" >
 				<WeatherSidebarSearch getCityData={getCityData} getLocation={getLocation} />
 				<div className="weather-sidebar__weather-status">
 					<img src={image} alt="" />
@@ -71,15 +77,15 @@ function WeatherSidebar({ getLocation }) {
 				{content}
 				{loaded}
 				{err}
-				<div className="divider" style={dividerStyles}></div>
+				< div className="divider" style={dividerStyles} ></div >
 				{/* <h2 className='weather-sidebar__fact-title'>Interesting fact!</h2>
 				<div className="weather-sidebar__fact">
 					{factContent}
 					{factLoaded}
 					{factErr}
 				</div> */}
-			</div>
-		</aside >
+			</div >
+		</motion.aside >
 	)
 }
 

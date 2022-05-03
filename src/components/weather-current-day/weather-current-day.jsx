@@ -1,6 +1,7 @@
 // react
 
 // additional functional
+import { motion } from 'framer-motion'
 
 // components
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
@@ -16,7 +17,10 @@ import highTemp from '../../images/high-temperature.png'
 function WeatherCurrentDay({ weatherInfo }) {
 	return (
 		<div className="weather-day-info">
-			<div className="weather-day-info__content">
+			<motion.div
+				className="weather-day-info__content"
+				transition={{ delay: 6 }}
+				animate={{ x: ['-100%', '0%'], opacity: [0, 1] }}>
 				<ul className="weather-day-info__list info-list">
 					<SkeletonTheme baseColor="#c5c5c5" highlightColor="#cecdcd">
 						{weatherInfo.date ? <ViewBox weatherInfo={weatherInfo} /> : [
@@ -32,7 +36,7 @@ function WeatherCurrentDay({ weatherInfo }) {
 				<SkeletonTheme baseColor="#c5c5c5" highlightColor="#cecdcd">
 					{weatherInfo.date ? <PoweredBy /> : <Skeleton width={300} height={'100%'} borderRadius={25} />}
 				</SkeletonTheme>
-			</div>
+			</motion.div>
 		</div>
 	)
 }
@@ -59,16 +63,6 @@ function ViewBox({ weatherInfo }) {
 	// humidity
 	const humidityLowerBiggerThan60 = humidity <= 60 || humidity <= 70 ? 'Average humidity' : 'High humidity'
 	const humidityLowerBiggerThan35 = humidity <= 35 ? 'Low humidity' : humidityLowerBiggerThan60
-
-	// animation keys for uv-index & humidity
-	// uv-index
-	// const uviLowerBiggerThan11 = uvi.toFixed() >= 11 ? { transform: 'rotate(0deg)' } : {}
-	// const uviLowerMatch10 = uvi.toFixed() <= 10 ? { transform: 'rotate(55deg)' } : uviLowerBiggerThan11
-	// const uviLowerMatch7 = uvi.toFixed() <= 7 ? { transform: 'rotate(87deg)' } : uviLowerMatch10
-	// const uviLowerMatch5 = uvi.toFixed() <= 5 ? { transform: 'rotate(115deg)' } : uviLowerMatch7
-	// const uviLowerMatch2 = uvi.toFixed() <= 2 ? { transform: 'rotate(145deg)' } : uviLowerMatch5
-	// const uviLowerMatch1 = uvi.toFixed() <= 1 ? { transform: 'rotate(170deg)' } : uviLowerMatch2
-	// const uvi0 = uvi === 0 ? { transform: 'rotate(180deg)' } : uviLowerMatch1
 
 	return (
 		<>

@@ -20,6 +20,8 @@
 
 // weather-controls
 .weather-controls {
+	position: relative;
+	z-index: -10;
 	display: flex;
 	justify-content: center;
 	&__content {

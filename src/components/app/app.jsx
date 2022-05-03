@@ -1,11 +1,16 @@
-// styles
-import './app.scss'
+// react
 import { useState } from 'react'
+
+// additional functional
+import { motion } from 'framer-motion'
 
 // components
 import WeatherSidebar from '../weather-sidebar/weather-sidebar'
 import WeatherWeekly from '../weather-weekly/weather-weekly'
 import WeatherCurrentDay from '../weather-current-day/weather-current-day'
+
+// styles
+import './app.scss'
 
 function App() {
 	const [weatherInfo, setWeatherInfo] = useState([])
@@ -23,16 +28,22 @@ function App() {
 		<div className="weather">
 			<WeatherSidebar getLocation={getLocation} />
 			<div className="weather-main">
-				<div className="weather-controls">
+				<motion.div
+					className="weather-controls"
+					transition={{ delay: 1.9 }}
+					animate={{ y: ['-100%', '0%'], opacity: [0, 1] }} >
 					<div className="weather-controls__content">
 						<p className="weather-controls__text">Weather for week</p>
 					</div>
-				</div>
+				</motion.div>
 				<WeatherWeekly stateLift={stateLift} location={location} />
-				<h2 className="weather__choose-title">Choose day of the week</h2>
+				<motion.h2
+					className="weather__choose-title"
+					transition={{ delay: 5 }}
+					animate={{ opacity: [0, 1] }}>Choose day of the week</motion.h2>
 				<WeatherCurrentDay weatherInfo={weatherInfo} />
 			</div>
-		</div>
+		</div >
 	)
 }
 

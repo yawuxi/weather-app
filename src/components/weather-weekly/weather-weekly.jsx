@@ -46,7 +46,7 @@ function WeatherWeekly({ stateLift, location }) {
 	return (
 		<div className="weather-weekly">
 			<div className="weather-weekly__content">
-				<ul className="weather-weekly__list weekly-list" >
+				<ul className="weather-weekly__list weekly-list">
 					{loaded}
 					{err}
 					{content}
