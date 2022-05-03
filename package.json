@@ -4,14 +4,13 @@
   "private": true,
   "homepage": "https://yawuxi.github.io/weather-app/",
   "dependencies": {
+    "framer-motion": "^6.3.3",
     "gh-pages": "^3.2.3",
     "moment": "^2.29.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-loading-skeleton": "^3.1.0",
-    "react-redux": "^8.0.1",
     "react-scripts": "5.0.1",
-    "redux": "^4.2.0",
     "sass": "^1.51.0"
   },
   "scripts": {
