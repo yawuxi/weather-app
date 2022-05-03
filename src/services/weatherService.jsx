@@ -47,6 +47,7 @@ const useWeatherService = () => {
 			},
 			uvi: item.uvi,
 			wind: item.wind_speed,
+			cloudiness: item.clouds,
 			weather: {
 				weatherStatus: item.weather[0].main,
 				weatherDescr: item.weather[0].description,
