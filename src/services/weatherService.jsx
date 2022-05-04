@@ -31,7 +31,11 @@ const useWeatherService = () => {
 	const _transformDataForSideBar = ({ current, timezone }) => {
 		return {
 			temp: current.temp,
-			location: timezone
+			location: timezone,
+			weather: {
+				weatherStatus: current.weather[0].main,
+				weatherDescr: current.weather[0].description,
+			},
 		}
 	}
 
