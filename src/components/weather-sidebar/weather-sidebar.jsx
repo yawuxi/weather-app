@@ -12,7 +12,11 @@ import WeatherSidebarSearch from './weather-sidebar-search/weather-sidebar-searc
 
 // styles&img
 import './weather-sidebar.scss'
-import image from '../../images/cloudy.png'
+import image_def from '../../images/sunny.png'
+import image_clear from '../../images/gifs/Sunny.gif'
+import image_clouds from '../../images/gifs/Cloudy.gif'
+import image_rain from '../../images/gifs/Raining.gif'
+import image_snow from '../../images/gifs/Snow.gif'
 
 function WeatherSidebar({ getLocation }) {
 	const { getDataForSideBar, loading, error } = useWeatherService()
@@ -31,19 +35,47 @@ function WeatherSidebar({ getLocation }) {
 			hours: moment().format().slice(11, 13),
 			minutes: moment().format().slice(14, 16)
 		},
+		weatherStatus: ''
 	})
+
+	const [weatherImage, setWeatherImage] = useState(image_def)
+
+	const checkWeatherStatus = () => {
+		switch (barState.weatherStatus) {
+			case 'Clear':
+				setWeatherImage(image_clear)
+				break
+			case 'Clouds':
+				setWeatherImage(image_clouds)
+				break;
+			case 'Rain':
+				setWeatherImage(image_rain)
+				break;
+			case 'Snow':
+				setWeatherImage(image_snow)
+				break;
+			case 'Mist':
+				setWeatherImage(image_clear)
+				break;
+		}
+	}
 
 	const getCityData = (data) => {
 		setBarState(barState =>
-			({ ...barState, temperature: data.temp, location: data.location }))
+			({ ...barState, temperature: data.temp, location: data.location, weatherStatus: data.weather.weatherStatus }))
+		checkWeatherStatus()
 	}
+
+	useEffect(() => {
+		checkWeatherStatus()
+	}, [barState.weatherStatus])
 
 	useEffect(() => {
 		getDataForSideBar(50.4501, 30.5234)
 			.then(res => {
-				setBarState(barState => ({ ...barState, temperature: res.temp, location: res.location }))
+				setBarState(barState => ({ ...barState, temperature: res.temp, location: res.location, weatherStatus: res.weather.weatherStatus }))
 			})
-
+		checkWeatherStatus()
 		const interval = setInterval(() => {
 			setBarState(barState => ({
 				...barState, time: {
@@ -72,7 +104,7 @@ function WeatherSidebar({ getLocation }) {
 			< div className="weather-sidebar__content" >
 				<WeatherSidebarSearch getCityData={getCityData} getLocation={getLocation} />
 				<div className="weather-sidebar__weather-status">
-					<img src={image} alt="" />
+					<img src={weatherImage} alt="" />
 				</div>
 				{content}
 				{loaded}

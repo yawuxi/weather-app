@@ -12,7 +12,7 @@ import './weather-sidebar-search.scss'
 function WeatherSidebarSearch({ getCityData, getLocation }) {
 	const [searchInputValue, setSearchInputValue] = useState('')
 
-	const { getDataForSideBar, getDataByCityName, getDataForWeek, setLoading, setError } = useWeatherService()
+	const { getDataForSideBar, getDataByCityName, getDataForWeek } = useWeatherService()
 
 	const searchCityByLocation = async () => {
 		const { lat, lon } = await getDataByCityName(searchInputValue)
